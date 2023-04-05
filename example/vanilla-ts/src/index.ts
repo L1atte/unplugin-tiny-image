@@ -1,19 +1,8 @@
-import { ImagePool } from "@squoosh/lib/build";
-import { cpus } from "node:os";
-import fs from "fs/promises";
+import sharp from "sharp";
 
-const imagePool = new ImagePool(cpus().length);
-const file = await fs.readFile("./test.jpg");
-const image = imagePool.ingestImage(file);
-const encodeOptions = {
-	mozjpeg: {},
-	jxl: {
-		quality: 90,
-	},
-};
-await image.encode(encodeOptions);
-//@ts-ignore
-const rawEncodedImage = image.encodedWith.mozjpeg.binary;
+await sharp("test.jpeg").toFile("hello.jpeg");
 
-fs.writeFile("./new.jpg", rawEncodedImage);
-console.log("success");
+const buffer = await sharp("test.jpeg").toBuffer();
+console.log(buffer.length);
+
+await sharp(buffer).toFile("buffer.jpeg");
