@@ -3,7 +3,7 @@ import sharp from "sharp";
 const extRE = /\.(png|jpeg|jpg|webp|wb2|avif)$/i;
 
 async function generateBundleHook(bundler: any) {
-	await Object.keys(bundler).forEach(async (key: string) => {
+	const res = Object.keys(bundler).map(async (key: string) => {
 		console.log("========");
 		const ext = getExtname(key);
 		if (key.match(extRE)) {
@@ -19,6 +19,7 @@ async function generateBundleHook(bundler: any) {
 			bundle.source = buffer;
 		}
 	});
+	await Promise.all(res);
 }
 
 export { generateBundleHook };

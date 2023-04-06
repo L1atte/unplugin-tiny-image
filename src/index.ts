@@ -15,8 +15,7 @@ export default createUnplugin<Options>((options?: Options) => {
 		apply: "build",
 		enforce: "pre",
 		async generateBundle(_: any, bundler: any) {
-			generateBundleHook(bundler);
-			console.log("1", bundler["assets/test-b441e73d.jpeg"], Object.keys(bundler));
+			await generateBundleHook(bundler);
 			return bundler;
 		},
 	};
