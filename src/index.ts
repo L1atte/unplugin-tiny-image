@@ -1,17 +1,14 @@
-import { resolve, extname } from "node:path";
-import sharp from "sharp";
-import { getExtname } from "./core/getExtname";
-import os from "node:os";
-import fs from "node:fs";
 import { createUnplugin } from "unplugin";
-import type { Options } from "./types";
+import type { Options } from "./core/types";
 import { generateBundleHook } from "./core/generateBundleHook";
+import { Context } from "./core/ctx";
+import { InputOptions } from "rollup";
+import { consola } from "consola";
 
-const extRE = /\.(png|jpeg|jpg|webp|wb2|avif)$/i;
 
-export default createUnplugin<Options>((options?: Options) => {
+export default createUnplugin<Options>(() => {
 	return {
-		name: "unplugin-starter",
+		name: "unplugin-tiny-image",
 		apply: "build",
 		enforce: "pre",
 		async generateBundle(_: any, bundler: any) {
