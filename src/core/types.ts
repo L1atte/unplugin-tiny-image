@@ -13,3 +13,10 @@ export interface ResolvedConfiguration {
 	cacheDir?: string;
 	outputPath?: string;
 }
+
+export interface LoggerCtx {
+	fileName: string;
+	newSize: number | string;
+	oldSize: number | string;
+	startTime: number | string | Date;
+}
